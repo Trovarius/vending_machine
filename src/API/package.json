@@ -12,5 +12,8 @@
     "hapi"
   ],
   "author": "Luiz Fernando de Lima Pereira (github.com/trovarius)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^17.5.2"
+  }
 }
