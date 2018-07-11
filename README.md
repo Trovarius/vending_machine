@@ -25,12 +25,16 @@ Abaixo uma descrição dos cenários de teste ara garantir a funcionalidade da a
 ### Cenários Recarga diárias
 
 #### Primeira utilização no dia
+| **Ação** | **Descrição** |
+| --- | :--- |
 | **Dado que** | Colaborador não utilizou a máquina hoje |
 | **Quando** | Inserir o cartão na máquina |
 | **Então** | Será zerado o saldo anterior |
 | **E** | Adicionado R$ 5,00 (cinco reais) de crédito para aquele dia |
 
 #### Segunda utilização no dia
+| **Ação** | **Descrição** |
+| --- | :--- |
 | **Dado que** | Colaborador já recarregou o cartão hoje |
 | **Quando** | Inserir o cartão na máquina |
 | **Então** | Será exibido o saldo atual |
@@ -38,6 +42,8 @@ Abaixo uma descrição dos cenários de teste ara garantir a funcionalidade da a
 ### Cenários de Compra
 
 #### Valor Produto <= Quantidade de créditos
+| **Ação** | **Descrição** |
+| --- | :--- |
 | **Dado que** | Colaborador já realizou a recarga diaária |
 | **Quando** | Inserir o cartão na máquina |
 | **E** | Escolher um produto com valor menor que a quantidade de créditos |
@@ -45,7 +51,8 @@ Abaixo uma descrição dos cenários de teste ara garantir a funcionalidade da a
 | **E** | Quantidade de produtos existem na máquina subtraido |
 
 #### Valor Produto > Quantidade de créditos
-
+| **Ação** | **Descrição** |
+| --- | :--- |
 | **Dado que** | Colaborador já realizou a recarga diaária |
 | **Quando** | Inserir o cartão na máquina |
 | **E** | Escolher um produto com valor maior que a quantidade de créditos |
