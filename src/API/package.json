@@ -1,0 +1,16 @@
+{
+  "name": "vending_machine_api",
+  "version": "1.0.0",
+  "description": "vending machine api for minutrade",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "vending_machine",
+    "minutrade",
+    "hapi"
+  ],
+  "author": "Luiz Fernando de Lima Pereira (github.com/trovarius)",
+  "license": "MIT"
+}
