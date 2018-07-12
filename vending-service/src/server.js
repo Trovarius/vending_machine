@@ -13,22 +13,14 @@ const server = Hapi.server({
 server.Today = new Date();
 
 const card_route = require('./routes/cartao_route')(server, card_repository);
+const date_route = require('./routes/date_route')(server);
+
 
 server.route({
     method:'GET',
     path:'/',
     handler:function(request,h) {
-        return'hello world';
-    }
-});
-
-// Add the route
-server.route({
-    method:'GET',
-    path:'/recarregar/{cartao}',
-    handler:function(request,h) {
-
-        return `Cartão incluido ${request.params.cartao}`;
+        return "Bem vindo a Vending Machine api";
     }
 });
 

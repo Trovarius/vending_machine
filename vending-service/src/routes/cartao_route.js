@@ -1,35 +1,11 @@
 
 'use strict'
+const card_api = require("../api/cartao");
 
 module.exports = (server, cardRepo) => {
 
     const response = require("../config/server_response");
 
-    function TodayBalanceIsEmpty(card, date){
-        console.log('history length:' + card.history.length)
-
-        if(card.history.length == 0) return true;
-        console.log(card.history);
-        console.log(date);
-
-        let milisecondsToDays = balancedate =>{
-            console.log(balancedate.getTime());
-            console.log(date.getTime());
-            let miliseconds = balancedate.getTime() - date.getTime();
-            console.log(miliseconds)
-
-            let days = parseInt(miliseconds/(1000*60*60*24));
-            
-            console.log(days);
-            
-            return days;
-        }
-
-        let today_history = card.history.filter(b => milisecondsToDays(b.date) == 0);
-        console.log(today_history);                            
-        return today_history.length <= 0;
-    }
-    
     server.route({
         method: ['POST', 'PUT'],
         path:'/cartao/{cardId}/recarregar',
@@ -43,7 +19,7 @@ module.exports = (server, cardRepo) => {
 
             if(!card) return response(h).NotFound("Cartão não encontrado");
             
-            if(!TodayBalanceIsEmpty(card, dateNow))
+            if(!card_api.TodayBalanceIsEmpty(card, dateNow))
                 return response(h).BadRequest("Já ocorreu uma recarga hoje");
             
             cardRepo.Recharge(cardId);
@@ -63,7 +39,7 @@ module.exports = (server, cardRepo) => {
             
             if(!card) return response(h).NotFound("Cartão não encontrado");
 
-            return response(h).OK(card.balance(dateNow));
+            return response(h).OK(card_api.GetBalance(card, dateNow));
         }
     });
 }
