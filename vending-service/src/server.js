@@ -2,12 +2,17 @@
 
 const Hapi=require('hapi');
 const config = require('./config/server')
+const card_repository = require('./repository/cartao_repository');
 
 // Create a server with a host and port
 const server = Hapi.server({
     host: config.HOST,
     port: config.PORT
 });
+
+server.Today = new Date();
+
+const card_route = require('./routes/cartao_route')(server, card_repository);
 
 server.route({
     method:'GET',
