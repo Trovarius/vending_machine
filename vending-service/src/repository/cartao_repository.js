@@ -22,12 +22,11 @@ module.exports = {
 
         return null;
     },
-    Recharge(cardId){
+    Recharge(cardId, recharge_date){
         var card = this.FindById(cardId);
 
         if(!card) return null;
-
-        card.history.push({balance: DAILY_BALANCE_VALUE, date: new Date() });
+        card.history.push({balance: DAILY_BALANCE_VALUE, date: new Date(recharge_date.getFullYear(), recharge_date.getMonth(), recharge_date.getDate()) });
         
         return card;
     }

@@ -1,4 +1,11 @@
 'use strict'
+function date_diff_in_days(dateNow, date)  {
+    let miliseconds = dateNow.getTime() - date.getTime();
+
+    let days = parseInt(miliseconds / (1000 * 60 * 60 * 24));
+
+    return days;
+}
 
 module.exports = {
     GetBalance(card, date = new Date()) {
@@ -6,15 +13,7 @@ module.exports = {
 
         if (card.history.length == 0) return 0.00;
 
-        let milisecondsToDays = balancedate => {
-            let miliseconds = balancedate.getTime() - date.getTime();
-
-            let days = parseInt(miliseconds / (1000 * 60 * 60 * 24));
-
-            return days;
-        }
-
-        var day_balance = card.history.filter(b => milisecondsToDays(b.date) == 0);
+        var day_balance = card.history.filter(b => date_diff_in_days(b.date, date) == 0);
 
         if (day_balance.length == 0) return 0.00;
 
@@ -24,16 +23,10 @@ module.exports = {
     },
     TodayBalanceIsEmpty(card, date) {
         if (card.history.length == 0) return true;
+        
+        console.log(card.history);
 
-        let milisecondsToDays = balancedate => {
-            let miliseconds = balancedate.getTime() - date.getTime();
-
-            let days = parseInt(miliseconds / (1000 * 60 * 60 * 24));
-
-            return days;
-        }
-
-        let today_history = card.history.filter(b => milisecondsToDays(b.date) == 0);
+        let today_history = card.history.filter(b => date_diff_in_days(b.date, date) == 0);
         return today_history.length <= 0;
     }
 }

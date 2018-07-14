@@ -26,11 +26,12 @@ module.exports = (server, cardRepo) => {
                 if(!card_api.TodayBalanceIsEmpty(card, dateNow))
                     return response(h).BadRequest("Já ocorreu uma recarga hoje");
                 
-                cardRepo.Recharge(cardId);
+                cardRepo.Recharge(cardId, dateNow);
     
                 let result = {
                     mensagem: "Cartão recarregado com sucesso.",
                     cardId: card.id,
+                    date: dateNow,
                     balance: card_api.GetBalance(card, dateNow),
                     actions: [
                         {
@@ -66,6 +67,7 @@ module.exports = (server, cardRepo) => {
     
                 let result = {
                     cardId: card.id,
+                    date: dateNow,
                     balance: card_api.GetBalance(card, dateNow),
                     actions: [
                         {
@@ -80,6 +82,45 @@ module.exports = (server, cardRepo) => {
                 return response(h).OK(result);
             }
         }
-        
+    });
+
+    server.route({
+        method: 'GET',
+        path:'/card/history/{cardId}',
+        config: {
+            description: 'Card History',
+            notes: 'Access this route to get card balance history',
+            tags: ['api'], // ADD THIS TAG
+            handler: function(request,h) {
+                let cardId = request.params.cardId;
+                let dateNow = server.Today;
+                
+                let card = cardRepo.FindById(cardId);
+                
+                if(!card) return response(h).NotFound("Cartão não encontrado");
+    
+                let result = {
+                    cardId: card.id,
+                    date: dateNow,
+                    history: card.history,
+                    actions: [
+                        {
+                            "action": "Recharge",
+                            "description": "Access this route to recharge this card",
+                            "method": "POST",
+                            "route" : `/card/${card.id}/recharge`
+                        },
+                        {
+                            "action": "Recharge",
+                            "description": "Access this route to get card infos",
+                            "method": "GET",
+                            "route" : `/card/${card.id}`
+                        }
+                    ]
+                }
+    
+                return response(h).OK(result);
+            }
+        }
     });
 }
