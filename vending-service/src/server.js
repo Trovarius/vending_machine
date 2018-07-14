@@ -1,41 +1,62 @@
 'use strict';
 
-const Hapi=require('hapi');
-const config = require('./config/server')
+const Hapi = require('hapi');
+const config = require('./config/server');
+const Inert = require('inert');
+const Vision = require('vision');
+const HapiSwagger = require('hapi-swagger');
 const card_repository = require('./repository/cartao_repository');
 
-// Create a server with a host and port
-const server = Hapi.server({
-    host: config.HOST,
-    port: config.PORT
-});
+(async () => {
+    // Create a server with a host and port
+    const server = Hapi.server({
+        host: config.HOST,
+        port: config.PORT
+    });
 
-server.Today = new Date();
+    server.Today = new Date();
 
-const card_route = require('./routes/cartao_route')(server, card_repository);
-const date_route = require('./routes/date_route')(server);
+    const swaggerOptions = {
+        info: {
+            title: 'Test API Documentation',
+            version: 'v1',
+        },
+    };
+
+    await server.register([
+        Inert,
+        Vision,
+        {
+            plugin: HapiSwagger,
+            options: swaggerOptions
+        }
+    ]);
 
 
-server.route({
-    method:'GET',
-    path:'/',
-    handler:function(request,h) {
-        return "Bem vindo a Vending Machine api";
-    }
-});
+    const card_route = require('./routes/cartao_route')(server, card_repository);
+    const date_route = require('./routes/date_route')(server);
 
-// Start the server
-async function start() {
 
-    try {
-        await server.start();
-    }
-    catch (err) {
-        console.log(err);
-        process.exit(1);
-    }
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: function (request, h) {
+            return "Bem vindo a Vending Machine api";
+        }
+    });
 
-    console.log('Server running at:', server.info.uri);
-};
+    // Start the server
+    async function start() {
 
-start();
+        try {
+            await server.start();
+        } catch (err) {
+            console.log(err);
+            process.exit(1);
+        }
+
+        console.log('Server running at:', server.info.uri);
+    };
+
+    start();
+})();

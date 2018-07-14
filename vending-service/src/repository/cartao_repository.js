@@ -16,7 +16,6 @@ var cards = [{
 module.exports = {
     FindById(cardId){
         if(!cards.length) return null;
-        console.log(cards);
         var card = cards.filter(c => c.id == cardId);
         
         if(card && card.length) return card[0];

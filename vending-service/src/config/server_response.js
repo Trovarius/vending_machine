@@ -4,13 +4,26 @@ module.exports = (h) => {
             return h.response(data).code(201);
         },
         NotFound(msg){
-            return h.response(msg).code(404);
+            let result ={
+                success: false,
+                mensage: msg
+            };
+
+            return h.response(result).code(404);
         },
         Error(msg){
-            return h.response(msg).code(500);
+            let result ={
+                success: false,
+                mensage: msg
+            };
+            return h.response(result).code(500);
         },
         BadRequest(msg){
-            return h.response(msg).code(400);
+            let result ={
+                success: false,
+                mensage: msg
+            };
+            return h.response(result).code(400);
         }
     }
 }

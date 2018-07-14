@@ -7,21 +7,14 @@ module.exports = {
         if (card.history.length == 0) return 0.00;
 
         let milisecondsToDays = balancedate => {
-            console.log(balancedate.getTime());
-            console.log(date.getTime());
             let miliseconds = balancedate.getTime() - date.getTime();
-            console.log(miliseconds)
 
             let days = parseInt(miliseconds / (1000 * 60 * 60 * 24));
-
-            console.log(days);
 
             return days;
         }
 
         var day_balance = card.history.filter(b => milisecondsToDays(b.date) == 0);
-
-        console.log(day_balance);
 
         if (day_balance.length == 0) return 0.00;
 
@@ -29,28 +22,18 @@ module.exports = {
 
         return balance;
     },
-    TodayBalanceIsEmpty(card, date){
-        console.log('history length:' + card.history.length)
+    TodayBalanceIsEmpty(card, date) {
+        if (card.history.length == 0) return true;
 
-        if(card.history.length == 0) return true;
-        console.log(card.history);
-        console.log(date);
-
-        let milisecondsToDays = balancedate =>{
-            console.log(balancedate.getTime());
-            console.log(date.getTime());
+        let milisecondsToDays = balancedate => {
             let miliseconds = balancedate.getTime() - date.getTime();
-            console.log(miliseconds)
 
-            let days = parseInt(miliseconds/(1000*60*60*24));
-            
-            console.log(days);
-            
+            let days = parseInt(miliseconds / (1000 * 60 * 60 * 24));
+
             return days;
         }
 
         let today_history = card.history.filter(b => milisecondsToDays(b.date) == 0);
-        console.log(today_history);                            
         return today_history.length <= 0;
     }
 }

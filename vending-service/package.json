@@ -5,7 +5,7 @@
   "main": "./src/server.js",
   "scripts": {
     "test": "test",
-    "start": "node ./src/server.js"
+    "start": "nodemon ./src/server.js"
   },
   "keywords": [
     "vending_machine",
@@ -15,6 +15,10 @@
   "author": "Luiz Fernando de Lima Pereira (github.com/trovarius)",
   "license": "MIT",
   "dependencies": {
-    "hapi": "^17.5.2"
+    "hapi": "^17.5.2",
+    "hapi-swagger": "^9.1.1",
+    "inert": "^5.1.0",
+    "nodemon": "^1.18.2",
+    "vision": "^5.3.3"
   }
 }
