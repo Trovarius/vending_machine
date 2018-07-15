@@ -5,18 +5,11 @@ const config = require('./config/server');
 const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
-const card_repository = require('./repository/card_repository');
-const product_repository = require('./repository/product_repository');
-const admin_route = require('./routes/admin_route');
-const card_route = require('./routes/card_route');
 const route_register = require("./routes");
 
 (async () => {
     // Create a server with a host and port
-    const server = Hapi.server({
-        host: config.HOST,
-        port: config.PORT
-    });
+    const server = Hapi.server(config);
 
     server.Today = new Date();
 
@@ -36,19 +29,8 @@ const route_register = require("./routes");
         }
     ]);
 
-    
     //Register Routes
     route_register(server);
-    
-
-    //Default route
-    server.route({
-        method: 'GET',
-        path: '/',
-        handler: function (request, h) {
-            return "Bem vindo a Vending Machine api, acesse /document para informações de uso da API";
-        }
-    });
 
     // Start the server
     async function start() {
