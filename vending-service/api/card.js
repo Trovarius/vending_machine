@@ -24,7 +24,7 @@ module.exports = {
 
         return balance;
     },
-    TodayBalanceIsEmpty(card, date) {
+    TodayHistoryIsEmpty(card, date) {
         if (card.history.length == 0) return true;
         
         console.log(card.history);
@@ -34,6 +34,9 @@ module.exports = {
     },
     Recharge(card, recharge_date){
         if(!card) return null;
+
+        if(!this.TodayHistoryIsEmpty(card, recharge_date))
+            return card;
 
         card.history.push({balance: DAILY_BALANCE_VALUE, date: new Date(recharge_date.getFullYear(), recharge_date.getMonth(), recharge_date.getDate()) });
         

@@ -4,7 +4,7 @@
   "description": "vending machine api for minutrade",
   "main": "./src/server.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha -R",
+    "test": "mocha -R spec specs/**/*.spec.js",
     "start": "nodemon ./server.js"
   },
   "keywords": [
@@ -19,9 +19,7 @@
     "hapi-swagger": "^9.1.1",
     "inert": "^5.1.0",
     "nodemon": "^1.18.2",
-    "vision": "^5.3.3"
-  },
-  "devDependencies": {
+    "vision": "^5.3.3",
     "chai": "^4.1.2",
     "mocha": "^5.2.0"
   }

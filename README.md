@@ -2,6 +2,22 @@
 
 Uma vending machine precisa de uma nova WEB API pois a atual será descontinuada. 
 
+## Iniciando o projeto
+
+Navegar até a pasta vending-service
+ > cd ./vending-service
+
+ Executar
+ > npm install
+ > npm start
+
+ Para executar os teste
+ > npm test
+
+ Acessar a documentação acessar
+
+ > http://localhost:8000/documentation
+
 ## Premissas
 As seguintes premissas devem ser respeitadas:
 
