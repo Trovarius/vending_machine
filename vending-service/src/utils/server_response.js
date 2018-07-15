@@ -6,7 +6,7 @@ module.exports = (h) => {
         NotFound(msg){
             let result ={
                 success: false,
-                mensage: msg
+                data: msg
             };
 
             return h.response(result).code(404);
@@ -14,14 +14,14 @@ module.exports = (h) => {
         Error(msg){
             let result ={
                 success: false,
-                mensage: msg
+                data: msg
             };
             return h.response(result).code(500);
         },
         BadRequest(msg){
             let result ={
                 success: false,
-                mensage: msg
+                data: msg
             };
             return h.response(result).code(400);
         }

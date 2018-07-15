@@ -5,7 +5,10 @@ const config = require('./config/server');
 const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
-const card_repository = require('./repository/cartao_repository');
+const card_repository = require('./repository/card_repository');
+const product_repository = require('./repository/product_repository');
+const admin_route = require('./routes/admin_route');
+const card_route = require('./routes/card_route');
 
 (async () => {
     // Create a server with a host and port
@@ -32,9 +35,9 @@ const card_repository = require('./repository/cartao_repository');
         }
     ]);
 
-    //Routes setup
-    const card_route = require('./routes/cartao_route')(server, card_repository);
-    const date_route = require('./routes/admin_route')(server);
+    //Register Routes
+    card_route(server, card_repository, product_repository);
+    admin_route(server);
 
     //Default route
     server.route({

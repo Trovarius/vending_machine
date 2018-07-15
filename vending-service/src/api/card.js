@@ -1,5 +1,7 @@
 'use strict'
 
+const DAILY_BALANCE_VALUE = 5.00;
+
 function date_diff_in_days(dateNow, date)  {
     let miliseconds = dateNow.getTime() - date.getTime();
 
@@ -29,5 +31,22 @@ module.exports = {
 
         let today_history = card.history.filter(b => date_diff_in_days(b.date, date) == 0);
         return today_history.length <= 0;
+    },
+    Recharge(card, recharge_date){
+        if(!card) return null;
+
+        card.history.push({balance: DAILY_BALANCE_VALUE, date: new Date(recharge_date.getFullYear(), recharge_date.getMonth(), recharge_date.getDate()) });
+        
+        return card;
+    },
+    BuyItem(card, item_price, buy_date){
+        if(!card) return null;
+        
+        if(item_price > this.GetBalance(card))
+            return false;
+
+        card.history.push({balance: (item_price * -1), date: new Date(buy_date.getFullYear(), buy_date.getMonth(), buy_date.getDate()) });
+        
+        return true;
     }
 }
