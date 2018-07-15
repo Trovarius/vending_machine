@@ -1,10 +1,9 @@
 
 'use strict'
 const card_api = require("../api/cartao");
+const response = require("../utils/server_response");
 
 module.exports = (server, cardRepo) => {
-
-    const response = require("../config/server_response");
 
     server.route({
         method: ['POST', 'PUT'],

@@ -1,7 +1,7 @@
 
 module.exports = (server) => {
 
-    const response = require("../config/server_response");
+    const response = require("../utils/server_response");
     
     function addDays(date, days) {
         var result = new Date(date);
@@ -11,7 +11,7 @@ module.exports = (server) => {
 
     server.route({
         method: ['POST', 'PUT'],
-        path:'/addday',
+        path:'/admin/addday',
         handler: function(request,h) {
             server.Today = addDays(server.Today, 1);
 

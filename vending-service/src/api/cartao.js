@@ -1,4 +1,5 @@
 'use strict'
+
 function date_diff_in_days(dateNow, date)  {
     let miliseconds = dateNow.getTime() - date.getTime();
 
