@@ -5,7 +5,7 @@
   "main": "./src/server.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha -R",
-    "start": "nodemon ./src/server.js"
+    "start": "nodemon ./server.js"
   },
   "keywords": [
     "vending_machine",

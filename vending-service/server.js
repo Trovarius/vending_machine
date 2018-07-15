@@ -9,6 +9,7 @@ const card_repository = require('./repository/card_repository');
 const product_repository = require('./repository/product_repository');
 const admin_route = require('./routes/admin_route');
 const card_route = require('./routes/card_route');
+const route_register = require("./routes");
 
 (async () => {
     // Create a server with a host and port
@@ -35,9 +36,10 @@ const card_route = require('./routes/card_route');
         }
     ]);
 
+    
     //Register Routes
-    card_route(server, card_repository, product_repository);
-    admin_route(server);
+    route_register(server);
+    
 
     //Default route
     server.route({
