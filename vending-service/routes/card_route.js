@@ -53,7 +53,7 @@ module.exports = (server, card_repo, product_repo) => {
                     actions: card_htaccess(card)
                 };
 
-                if(!card_api.TodayBalanceIsEmpty(card, dateNow))
+                if(!card_api.TodayHistoryIsEmpty(card, dateNow))
                 {
                     result.menssage = "Já ocorreu uma recarga hoje";
                     return response(h).BadRequest(result);
