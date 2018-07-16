@@ -12,23 +12,19 @@ function DateDiffInDays(dateNow, date)  {
 
 module.exports = {
     GetBalance(card, date = new Date()) {
-        console.log(card.history);
-
         if (card.history.length == 0) return 0.00;
 
-        var day_balance = card.history.filter(b => DateDiffInDays(b.date, date) == 0);
+        let day_balance = card.history.filter(b => DateDiffInDays(b.date, date) == 0);
 
         if (day_balance.length == 0) return 0.00;
 
-        var balance = day_balance.map(db => db.balance).reduce((a, b) => a + b, 0.00);
+        let balance = day_balance.map(db => db.balance).reduce((a, b) => a + b, 0.00);
 
         return balance;
     },
     TodayHistoryIsEmpty(card, date) {
         if (card.history.length == 0) return true;
         
-        console.log(card.history);
-
         let today_history = card.history.filter(b => DateDiffInDays(b.date, date) == 0);
         return today_history.length <= 0;
     },

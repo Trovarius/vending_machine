@@ -36,12 +36,12 @@ module.exports = (server, card_repo, product_repo) => {
             notes: 'Access this route to recharge this card',
             tags: ['api'], // ADD THIS TAG
             handler: function(request,h) {
-                var cardId = request.params.cardId;
-                var dateNow = server.Today;
+                let cardId = request.params.cardId;
+                let dateNow = server.Today;
                 
                 if(!cardId) return response(h).NotFound("Cartão não encontrado");
     
-                var card = card_repo.FindById(cardId);
+                let card = card_repo.FindById(cardId);
     
                 if(!card) return response(h).NotFound("Cartão não encontrado");
                 
@@ -79,9 +79,9 @@ module.exports = (server, card_repo, product_repo) => {
             notes: 'Access this route to buy item with a card',
             tags: ['api'], // ADD THIS TAG
             handler: function(request,h) {
-                var cardId = request.params.cardId;
+                let cardId = request.params.cardId;
                 let itemId =  request.params.itemId;
-                var dateNow = server.Today;
+                let dateNow = server.Today;
                 
                 if(!cardId) return response(h).NotFound("Cartão não encontrado");
                 if(!itemId) return response(h).NotFound("Item  não encontrado");

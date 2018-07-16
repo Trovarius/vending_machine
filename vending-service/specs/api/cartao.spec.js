@@ -89,10 +89,10 @@ describe('Card', function () {
     it("Saldo não adiciona mesmo se tentar recarregar duas vezes por dia",  () => {
       let today = new Date();
 
-      var first_recharge_of_day = card_api.Recharge(card, today);
+      let first_recharge_of_day = card_api.Recharge(card, today);
       let first_balance = card_api.GetBalance(first_recharge_of_day, today);
 
-      var second_recharge_of_day = card_api.Recharge(first_recharge_of_day, today);
+      let second_recharge_of_day = card_api.Recharge(first_recharge_of_day, today);
       let second_balance = card_api.GetBalance(second_recharge_of_day, today);
       
 
@@ -109,7 +109,7 @@ describe('Card', function () {
 
       let item_price = balance + 1.0;
 
-      var result = card_api.BuyItem(card, item_price, today);
+      let result = card_api.BuyItem(card, item_price, today);
       
       assert.isFalse(result);
     })

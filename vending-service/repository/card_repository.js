@@ -1,6 +1,6 @@
 'use strict'
 
-var cards = [{
+let cards = [{
     id: 1,
     history: [
         {balance: 3.5, date: new Date(2018, 6, 10) },
@@ -15,14 +15,14 @@ var cards = [{
 module.exports = {
     FindById(cardId){
         if(!cards.length) return null;
-        var card = cards.filter(c => c.id == cardId);
+        let card = cards.filter(c => c.id == cardId);
         
         if(card && card.length) return card[0];
 
         return null;
     },
     Save(cardId, card){
-        var card = this.FindById(cardId);
+        let card = this.FindById(cardId);
 
         if(!card) return null;
         
