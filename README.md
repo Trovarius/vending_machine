@@ -64,7 +64,6 @@ Abaixo uma descrição dos cenários de teste ara garantir a funcionalidade da a
 | **Quando** | Inserir o cartão na máquina |
 | **E** | Escolher um produto com valor menor que a quantidade de créditos |
 | **Então** | O produto será liberado para retirada |
-| **E** | Quantidade de produtos existem na máquina subtraido |
 
 #### Valor Produto > Quantidade de créditos
 | **Ação** | **Descrição** |
