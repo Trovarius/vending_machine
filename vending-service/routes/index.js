@@ -8,7 +8,7 @@ module.exports = server =>{
         method: 'GET',
         path: '/',
         handler: function (request, h) {
-            return "Bem vindo a Vending Machine api, acesse /document para informações de uso da API";
+            return "Bem vindo a Vending Machine api, acesse /documention para informações de uso da API";
         }
     });
     
