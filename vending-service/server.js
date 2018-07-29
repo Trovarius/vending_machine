@@ -2,48 +2,48 @@
 
 const Hapi = require('hapi');
 const config = require('./config/server');
-const Inert = require('inert');
-const Vision = require('vision');
-const HapiSwagger = require('hapi-swagger');
-const route_register = require("./routes");
+const card_controller = require('./controllers/card_controller');
+const card_repo = require('./repository/card_repository');
+const Path = require('path')
 
-(async () => {
-    // Create a server with a host and port
-    const server = Hapi.server(config);
 
-    server.Today = new Date();
-
-    const swaggerOptions = {
-        info: {
-            title: 'Test API Documentation',
-            version: 'v1',
-        },
-    };
-
-    await server.register([
-        Inert,
-        Vision,
-        {
-            plugin: HapiSwagger,
-            options: swaggerOptions
+// Create a server with a host and port
+const server = Hapi.server({
+    host: config.host,
+    port: config.port,
+    routes: {
+        files: {
+            relativeTo: Path.join(__dirname, 'public')
         }
-    ]);
+    }
+});
 
-    //Register Routes
-    route_register(server);
 
-    // Start the server
-    async function start() {
+card_controller(server, card_repo)
 
-        try {
-            await server.start();
-        } catch (err) {
-            console.log(err);
-            process.exit(1);
-        }
+// Start the server
+async function start() {
 
-        console.log('Server running at:', server.info.uri);
-    };
+    try {
+        await server.register(require('inert'));
+        
+        server.route({
+            method: 'GET',
+            path: '/{param*}',
+            handler: {
+                directory: {
+                    path: '.'
+                }
+            }
+        });
 
-    start();
-})();
+        await server.start();
+    } catch (err) {
+        console.log(err);
+        process.exit(1);
+    }
+
+    console.log('Server running at:', server.info.uri);
+};
+
+start();

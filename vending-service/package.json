@@ -1,26 +1,26 @@
 {
-  "name": "vending_machine_api",
+  "name": "vending-service",
   "version": "1.0.0",
-  "description": "vending machine api for minutrade",
-  "main": "./src/server.js",
+  "description": "Vending service API",
+  "main": "server.js",
   "scripts": {
-    "test": "mocha -R spec specs/**/*.spec.js",
-    "start": "nodemon ./server.js"
+    "test": "node .\\node_modules\\mocha\\bin\\mocha .\\test\\**\\*.test.js",
+    "start": "node .\\node_modules\\nodemon\\bin\\nodemon.js server.js"
   },
   "keywords": [
-    "vending_machine",
-    "minutrade",
-    "hapi"
+    "vending",
+    "machine",
+    "api"
   ],
-  "author": "Luiz Fernando de Lima Pereira (github.com/trovarius)",
+  "author": "Trovarius",
   "license": "MIT",
   "dependencies": {
     "hapi": "^17.5.2",
-    "hapi-swagger": "^9.1.1",
-    "inert": "^5.1.0",
-    "nodemon": "^1.18.2",
-    "vision": "^5.3.3",
+    "inert": "^5.1.0"
+  },
+  "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.3"
   }
 }

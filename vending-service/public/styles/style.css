@@ -1,0 +1,406 @@
+@import "https://fonts.googleapis.com/css?family=Pacifico|Roboto+Condensed";
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  background-color: #f4acb7;
+  width: 100%;
+  height: 100%;
+  min-height: 770px;
+  position: relative;
+}
+
+.machine {
+  position: absolute;
+  top: 50px;
+  left: calc(50% - 165px);
+  width: 330px;
+  height: 500px;
+  background-color: #84dcc6;
+  border-radius: 10px;
+  perspective: 300px;
+}
+.machine:before {
+  position: absolute;
+  content: "";
+  z-index: -1;
+  border-radius: 3px;
+  background-color: #969696;
+  width: 30px;
+  height: 40px;
+  top: 150px;
+  right: 10px;
+}
+.machine:after {
+  position: absolute;
+  content: "";
+  z-index: -1;
+  border-radius: 3px;
+  background-color: black;
+  width: 26px;
+  height: 15px;
+  top: 152px;
+  right: 12px;
+}
+
+.glass {
+  width: 260px;
+  height: 400px;
+  background: linear-gradient(to bottom right, rgba(150, 200, 255, 0.2), rgba(150, 200, 255, 0.7));
+  overflow: hidden;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 5px;
+  z-index: 5;
+}
+.glass:after {
+  position: absolute;
+  content: "";
+  top: -120px;
+  right: -420px;
+  width: 500px;
+  height: 600px;
+  transform: rotate(-20deg);
+  background: linear-gradient(to bottom, rgba(150, 180, 255, 0.2), rgba(255, 255, 255, 0));
+}
+
+.inner {
+  width: 260px;
+  height: 400px;
+  background-color: black;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.inner:before, .inner:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  width: 50px;
+  height: 100%;
+  box-shadow: 0 0 100px 30px rgba(255, 230, 150, 0.9);
+  z-index: 2;
+}
+.inner:before {
+  left: -50px;
+  animation: light-flicker 7s infinite;
+}
+.inner:after {
+  right: -50px;
+}
+
+@keyframes light-flicker {
+  0%, 18%, 20%, 98%, 100% {
+    opacity: 1;
+  }
+  99%, 19% {
+    opacity: 0.5;
+  }
+}
+.tray-inner {
+  width: 260px;
+  height: 50px;
+  background-color: black;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  border-radius: 5px;
+}
+.tray-inner .container {
+  position: absolute;
+  bottom: -7px;
+  left: 45%;
+  border-color: transparent !important;
+  z-index: 10;
+  animation: shake-can 0.25s 0.5s infinite;
+  transform-origin: center -100px;
+}
+.tray-inner .container .can {
+  transform: rotate(-20deg) scale(0.5, 0.5);
+  opacity: 0;
+  animation: show-can 0.5s 0.5s forwards;
+}
+.tray-inner .container.hide {
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+@keyframes shake-can {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+@keyframes show-can {
+  0% {
+    transform: rotate(-20deg) scale(0.5, 0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateY(-100px) rotate(70deg) scale(10, 10);
+    opacity: 1;
+  }
+}
+.tray {
+  width: 260px;
+  height: 50px;
+  background-color: #b4b4b4;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  border-radius: 5px;
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition: all 0.5s;
+  transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+}
+.tray.open {
+  transform: rotateX(-45deg);
+}
+.tray:after {
+  content: "push";
+  position: absolute;
+  top: 28px;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  display: block;
+  opacity: 0.5;
+  color: black;
+  font-size: 12px;
+}
+
+.shelf {
+  display: block;
+  width: 100%;
+  border-bottom: 5px solid #282837;
+}
+.shelf:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.container {
+  float: left;
+  width: 52px;
+  height: 70px;
+  border-width: 0;
+  border-bottom-width: 15px;
+  border-style: solid;
+  position: relative;
+}
+.container .can-label {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  line-height: 15px;
+  font-size: 10px;
+}
+.container .can {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 12px);
+  width: 24px;
+  height: 40px;
+  border-radius: 3px;
+  font-family: "Pacifico", cursive;
+  overflow: hidden;
+}
+.container .can:before {
+  position: absolute;
+  transform-origin: top left;
+  transform: rotate(-90deg);
+  top: 40px;
+  left: -2px;
+  width: 40px;
+  text-align: center;
+  color: white;
+  font-size: 12px;
+}
+.container .can:after {
+  position: absolute;
+  content: "";
+  right: 3px;
+  top: 3px;
+  width: 3px;
+  height: calc(100% - 6px);
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+}
+
+.arm {
+  position: absolute;
+  top: 390px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: #c8c8c8;
+  z-index: 1;
+  transition-timing-function: linear;
+}
+.arm:after, .arm:before {
+  position: absolute;
+  content: "";
+  width: 5px;
+  height: 28px;
+  top: -9px;
+  left: 0;
+  background-color: #a0a0a0;
+}
+.arm:after {
+  left: auto;
+  right: 0;
+}
+.arm .hand {
+  position: absolute;
+  top: -5px;
+  left: 200px;
+  width: 40px;
+  height: 20px;
+  border-radius: 4px;
+  background-color: #a0a0a0;
+  transition-timing-function: linear;
+}
+.arm .hand:before, .arm .hand:after {
+  position: absolute;
+  content: "";
+  width: 6px;
+  height: 30px;
+  top: -5px;
+  border-radius: 2px;
+  background-color: #32373c;
+  z-index: -1;
+}
+.arm .hand:before {
+  left: 4px;
+}
+.arm .hand:after {
+  right: 4px;
+}
+.arm .hand .container {
+  position: absolute;
+  top: -27px;
+  left: -5px;
+  z-index: -2;
+  border-color: transparent !important;
+}
+
+.numpad {
+  position: absolute;
+  bottom: 20px;
+  left: calc(50% - 145px);
+  width: 290px;
+  background-color: #f4acb7;
+  padding: 10px 20px 0 20px;
+  border-radius: 5px;
+  z-index: 10;
+}
+.numpad .current-input {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  font-size: 24px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+}
+.numpad button {
+  appearance: none;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  color: white;
+  cursor: pointer;
+  outline: 0;
+  font-size: 20px;
+  transition: all 0.25s;
+}
+.numpad button.disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+  filter: blur(3px);
+}
+
+[data-can="1"] {
+  border-color: #ff3539;
+}
+[data-can="1"] .can {
+  background-color: #ff686b;
+}
+[data-can="1"] .can:before {
+  content: "cherry";
+}
+
+[data-can="2"] {
+  border-color: #ff6628;
+}
+[data-can="2"] .can {
+  background-color: #ff8a5b;
+}
+[data-can="2"] .can:before {
+  content: "ginger";
+}
+
+[data-can="3"] {
+  border-color: #8c8c8c;
+}
+[data-can="3"] .can {
+  background-color: #b4b4c8;
+}
+[data-can="3"] .can:before {
+  content: "mist";
+}
+
+[data-can="4"] {
+  border-color: #783c50;
+}
+[data-can="4"] .can {
+  background-color: #501e32;
+}
+[data-can="4"] .can:before {
+  content: "berry";
+}
+
+[data-can="5"] {
+  border-color: #5cd1b4;
+}
+[data-can="5"] .can {
+  background-color: #84dcc6;
+}
+[data-can="5"] .can:before {
+  content: "mint";
+}
+
+a {
+  font-family: "Pacifico";
+  text-decoration: none;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  color: white;
+  padding: 20px;
+  font-size: 22px;
+  opacity: 0.25;
+  transition: all 0.2s;
+}
+a:hover {
+  opacity: 1;
+}
