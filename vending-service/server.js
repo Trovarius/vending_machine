@@ -3,7 +3,9 @@
 const Hapi = require('hapi');
 const config = require('./config/server');
 const card_controller = require('./controllers/card_controller');
+const machine_controller = require('./controllers/machine_controller');
 const card_repo = require('./repository/card_repository');
+const items_repo = require('./repository/items_repository');
 const Path = require('path')
 
 
@@ -20,6 +22,7 @@ const server = Hapi.server({
 
 
 card_controller(server, card_repo)
+machine_controller(server, items_repo, card_repo)
 
 // Start the server
 async function start() {

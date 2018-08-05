@@ -1,4 +1,4 @@
-class VendingMachine{
+class VendingMachineJQuery{
 	constructor(){
 		this.setupLabels();
 		this.setInitialDisabled();
@@ -40,7 +40,7 @@ class VendingMachine{
 	}
 	
 	addNumpad(label, type){
-		$('.numpad').append('<button data-label="' + label + '" data-type="' + type + '">' + label + '</button>');
+		$('.itemnumpad').append('<button data-label="' + label + '" data-type="' + type + '">' + label + '</button>');
 	}
 	
 	setInitialDisabled(){

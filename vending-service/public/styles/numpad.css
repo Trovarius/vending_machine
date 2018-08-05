@@ -1,0 +1,79 @@
+/* Reset */
+
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+  
+  body {
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: none;
+    -webkit-user-select: none;
+    font-size:12px;
+    height:100%;
+    width:100%;
+    margin:0px;
+    padding:0px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  /* Reset */
+  
+  #wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 196px;
+    margin-left: -100px;
+    margin-top: -150px;
+  }
+  
+  #display {
+    position: relative;
+    top: -10px;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #00D881;
+  }
+  
+  #numpad {
+    position: relative;
+  }
+  
+  #display li {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 200%;
+    padding: 5px 12px;
+    background: #FDD147;
+    color: black;
+    margin-right: 1px;
+  }
+  
+  #numpad li {
+    font-family: monospace;
+    font-size: 200%;
+    border-radius: 51%;
+    float: left;
+    padding: 12px 20px;
+    background: #00D881;
+    color: black;
+    margin: 5px;
+    cursor: pointer;
+    -webkit-transition: box-shadow 0.3s ease-in-out;
+    -moz-transition: box-shadow 0.3s ease-in-out;
+    -o-transition: box-shadow 0.3s ease-in-out;
+    -ms-transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out; 
+  }
+  
+  .pressed {
+    box-shadow: inset 2px 2px 12px 5px rgba(0,0,0,0.5);
+  }
+  
+  .clear {
+    clear: both;
+  }

@@ -1,56 +1,85 @@
-Vue.component('item-machine', {
-    props: ["name", "price", "id"],
-    methods: {
-        buyItem() {
-            console.log(this.name);
-            console.log(this.price);
-            console.log(this.id);
-        }
-    },
-    template: `<div class="container" :data-can="id" :data-name="name"><div class="can"></div></div>`
-});
-
-Vue.component('card-pad', {
+Vue.component('machine', {
     data() {
         return {
-            cardNumber: "",
-            cardInfo: ""
+            card: null,
+            items: []
+        }
+    },
+    watch:{
+        card:function(newCard, oldCard){
+            this.getItems();
         }
     },
     methods: {
-        entrar(el) {
-            fetch(`/card/${this.cardNumber}`)
-            .then(data =>{
+        getCard(cardNumber) {
+            fetch(`/card/${cardNumber}`)
+                .then(data => {
+                    console.log(data);
+                    return data.json();
+                })
+                .catch(error => this.card = null)
+                .then(json => {
+                    this.card = json;
+                    console.log(this.card);
+                });
+        },
+        recharge() {
+            fetch(this.card.actions.Recharge.route, {
+                    method: 'POST', // or 'PUT'
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                    return data.json();
+                })
+                .catch(error => this.card = null)
+                .then(json => {
+                    this.card = json;
+                });
+        },
+        getItems(){
+            fetch(`/items/${this.card.balance}`)
+            .then(data => {
                 console.log(data);
                 return data.json();
             })
-            .catch(error => this.cardInfo = "Cartão não encontrado")
-            .then(json =>{
-                console.log(json);
-                this.cardInfo = JSON.stringify(json);
+            .catch(error => this.card = null)
+            .then(json => {                
+                this.items = json;
+                console.log(this.items);
             });
+        },
+        buyItem(itemDesc){
             
+            let itemId = this.items.filter(i => i.description == itemDesc)[0].id;
+            
+            fetch(`/buy/${itemId}/${this.card.id}`, {
+                method: 'POST', // or 'PUT'
+                body: JSON.stringify({item_id: itemId, card_id: this.card.id}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(data => {
+                console.log(data);
+                return data.json();
+            })
+            .catch(error => this.card = null)
+            .then(json => {
+                this.getCard(this.card.id);
+            });
         }
     },
-    template: `<div style="margin-left:50px">
-    {{cardNumber}}
-    <button @click="cardNumber += '1' ">1</button>
-    <button @click="cardNumber += '2'">2</button>
-    <button @click="cardNumber += '3'">3</button>
-    <button @click="cardNumber += '4'">4</button>
-    <button @click="cardNumber += '5'">5</button>
-    
-    <button @click="entrar()">Entrar</button>
-    {{cardInfo}}
-</div>`
-});
-
-Vue.component('machine', {
     template: `<div>
-    
-    <card-pad/>
+    <div class="header" v-if="card">
+        <card-balance :balance="card.balance"/>
 
-    <div class="machine">
+        <recharge-button @clicked="recharge"/>
+    </div>
+
+    <div class="machine" v-if="card">
 
         <div class="inner">
             <div class="arm">
@@ -58,11 +87,7 @@ Vue.component('machine', {
             </div>
             
             <div class="shelf" data-shelf="A">
-                <item-machine id="1" name="Coca"/>
-                <item-machine id="2" name="pipoca"/>
-                <item-machine id="3" name="energetico"/>
-                <item-machine id="4" name="amendoim"/>
-                <item-machine id="5" name="chocolate"/>
+                <item-machine v-for="item in this.items" :id="item.id" :name="item.description" />
             </div>
             
         </div>
@@ -79,12 +104,14 @@ Vue.component('machine', {
         <div class="numberpad">
         </div>
     </div>
-    
-    <div class="numpad">
-        <div class="current-input"></div>
+
+  
+
+    <div class="itemnumpad" v-if="card">
+        <numpad :buttons="this.items.map(x => x.description)" @enter="buyItem" clearEverySelection/>
     </div>
 
- 
+    <numpad @enter="getCard" itens="" v-else/>
     
     <a href="https://twitter.com/lewitje" target="_blank">by @lewitje</a>
     </div>`
